@@ -1,3 +1,14 @@
+# --------------------------------------------------------------------------- %
+#  ADD FORMAT FOR TEX
+# --------------------------------------------------------------------------- %
+# A6 + CROP (online-druck.biz)
+  if [ `grep -s "% SIZE IS SET" ${TMPID}.preamble | wc -l` -lt 1 ]
+  then
+  echo "% SIZE IS SET"                                 >> ${TMPID}.preamble
+  echo "\usepackage{geometry}"                         >> ${TMPID}.preamble
+  echo "\geometry{paperwidth=111mm,paperheight=154mm}" >> ${TMPID}.preamble
+  fi
+# --------------------------------------------------------------------------- %
 
 # --------------------------------------------------------------------------- #
 
@@ -10,8 +21,7 @@ function MKPDFXCOMPLIANT() {
 
 # PDF/X COMPLIANCY
 # ---------------- #
-# echo "\usepackage[x-1a]{pdfx}"                       >> ${TMPID}.preamble
-
+  echo "\usepackage[x-1a]{pdfx}"                       >> ${TMPID}.preamble
   echo "<?xpacket begin=''
          id='W5M0MpCehiHzreSzNTczkc9d'?>"              > $TMPDIR/pdfx-1a.xmp
   cp "$COLORPROFILE" $TMPDIR
@@ -20,8 +30,8 @@ function MKPDFXCOMPLIANT() {
   \Author{${THISPDFXAUTHOR}}
   \Org{${THISPDFXORG}}
   \Doi{123456789}" > ${TMPID}.xmpdata
-  echo '\pdfpageattr{/MediaBox [0 0 436 612]
-               /TrimBox [8 8 428 604]}
+  echo '\pdfpageattr{/MediaBox [0 0 314 436]
+               /TrimBox [8 8 306 228]}
         \pdfcatalog{
         /OutputIntents [ <<
        /Info (none)
@@ -69,33 +79,30 @@ function DOCUMENTCLASS() {
 function ADD2PREAMBLE() { echo "$*" >> ${TMPID}.preamble ; }
 
 # --------------------------------------------------------------------------- #
-
-# =========================================================================== #
-# SHARED SVG FUNCTIONS
-# =========================================================================== #
-  function svgonlines() {
-
-  SVGIN="$1"
-    OUT="$2"
-# --------------------------------------------------------------------------- #
-  BFOO=`echo N${RANDOM}FO0 | cut -c 1-8`
-  SFOO=`echo S${RANDOM}F0O | cut -c 1-8`
-# --------------------------------------------------------------------------- #
-# MOVE ALL LAYERS ON SEPARATE LINES (TEMPORARILY; EASIFY PARSING LATER ON)
-# --------------------------------------------------------------------------- #
-  sed ":a;N;\$!ba;s/\n/$BFOO/g" $SVGIN   | # REMOVE ALL LINEBREAKS (BUT SAVE)
-  sed "s/ /$SFOO/g"                      | # REMOVE ALL SPACE (BUT SAVE)
-  sed 's/<g/4Fgt7RfjIoPg7/g'             | # PLACEHOLDER FOR GROUP OPEN
-  sed ':a;N;$!ba;s/\n/ /g'               | # REMOVE ALL NEW LINES
-  sed 's/4Fgt7RfjIoPg7/\n<g/g'           | # RESTORE GROUP OPEN + NEWLINE
-  sed '/groupmode="layer"/s/<g/4Fgt7R/g' | # PLACEHOLDER FOR LAYERGROUP OPEN
-  sed ':a;N;$!ba;s/\n/ /g'               | # REMOVE ALL LINEBREAKS
-  sed 's/4Fgt7R/\n<g/g'                  | # RESTORE LAYERGROUP OPEN + NEWLINE
-  sed 's/<\/svg>/\n&/g'                  | # PUT SVG CLOSE ON NEW LINE
-  sed 's/display:none/display:inline/g'  | # MAKE VISIBLE EVEN WHEN HIDDEN
-  tee > ${OUT}                             # WRITE TO TEMPORARY FILE
+  if [ `grep -s "% MAKE PAGE AMOUNT DIVIDABLE BY 4" ${TMPID}.preamble | #
+        wc -l` -lt 1 ];then
+        echo "% MAKE PAGE AMOUNT DIVIDABLE BY 4" >> ${TMPID}.preamble
+      # https://groups.google.com/forum/#!topic/de.comp.text.tex/j8wWMv8lZaM
+        echo '\newcount\vs
+              \newcount\vsi
+              \newcommand\cleartofour{
+               \mbox{}\clearpage
+               \pagestyle{empty}
+               \vs\thepage
+               \advance\vs by 3
+               \vsi\vs
+               \divide\vs by 4
+               \multiply\vs by 4
+               \ifnum\vs=\vsi\else\cleartofour\fi
+              }' >> ${TMPID}.preamble
+  fi
 # --------------------------------------------------------------------------- #
 
-  }
-# =========================================================================== #
+function CLOSEBOOK() {
+
+   write2src "\cleartofour"
+
+ }
+
+# --------------------------------------------------------------------------- #
 

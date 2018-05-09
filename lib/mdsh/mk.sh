@@ -27,9 +27,9 @@
 # --------------------------------------------------------------------------- #
 # INCLUDE                                                                     #
 # --------------------------------------------------------------------------- #
-  source "$SHDIR/../sh/prepress.functions"
-  source "$SHDIR/../sh/page.functions"
-  source "$SHDIR/../sh/text.functions"
+  source "$SHDIR/prepress.functions"
+  source "$SHDIR/page.functions"
+  source "$SHDIR/text.functions"
 
   source "$SHDIR/output.functions"
   source "$SHDIR/href.functions"
@@ -46,9 +46,9 @@
 # --------------------------------------------------------------------------- #
   if [ `ls $SRCDUMP 2>/dev/null | wc -l` -gt 0 ]; then
 
-   $preOutput
-   $lastAction
-   $postOutput
+   for D in $preOutput; do $D ;done
+            $lastAction
+   for D in $postOutput; do $D ;done
 
   # ----------------------------------------------------------------------- #
   else echo '$SRCDUMP not existing'; 
