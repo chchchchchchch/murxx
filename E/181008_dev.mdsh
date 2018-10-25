@@ -6,7 +6,7 @@
 % USEPACKAGE: ../lib/tex/conditions
 % USEPACKAGE: ../lib/tex/lstlanguages
 % ---
-% DOCUMENTCLASS: [fontsize=12pt,cleardoublepage=empty]{scrbook}
+% DOCUMENTCLASS: [fontsize=11pt,cleardoublepage=empty]{scrbook}
 % --------------------------------------------------------------------------- %
 % PDFXTITLE: twenty years of mur.at 
 % PDFXAUTHOR: Christoph Haag
@@ -15,11 +15,12 @@
 % ----
 % USEPACKAGE: 181008_basic
 % --------------------------------------------------------------------------- %
+%!ADD2PREAMBLE: \usepackage{showframe}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+consequat. Duis aute irure dolor[^]{in reprehenderit in voluptate velit} esse
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
 non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
