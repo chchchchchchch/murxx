@@ -8,7 +8,7 @@ stages:
   - build
     #  - deploy
   
-build-font:
+build-pdf:
   stage: build
   script:
     - apt-get update
