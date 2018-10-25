@@ -5,6 +5,7 @@
 #       check for README/LICENSE AT REMOTE LOCATION
 # ====================================================================== #
   SRCDIR=`echo $* | grep "/" | head -n 1`
+  NONINTERACTIVE=`echo $* | grep -- "--non-interactive" | wc -l`
 # ---------------------------------------------------------------------- #
   if [ ! -d $SRCDIR ]
    then echo "----"; echo "$SRCDIR NOT A DIRECTORY."
@@ -16,22 +17,26 @@
          wc -l` -gt 0 ]; then
         N=`cat \`find $SRCDIR -name "*.remote"\` | #
                  grep "^[ \t]*https\?:" | wc -l`
-        echo -e "THIS MEANS CHECKING $N FILES \
-                 AND WILL TAKE SOME TIME.\n" | tr -s ' '
-        read -p "SHOULD WE DO IT? [y/n] " ANSWER
-        if [ X$ANSWER != Xy ] ; then echo "BYE."; exit 1;
-                                else echo; fi
+        if [ "$NONINTERACTIVE" != 1 ];then
+          echo -e "THIS MEANS CHECKING $N FILES \
+                   AND WILL TAKE SOME TIME.\n" | tr -s ' '
+          read -p "SHOULD WE DO IT? [y/n] " ANSWER
+          if [ X$ANSWER != Xy ] ; then echo "BYE."; exit 1;
+                                  else echo; fi
+        fi
     else echo "NOTHING TO DO.";exit 0;
    fi
   fi
 # ---------------------------------------------------------------------- #
-  echo -e "THE FOLLOWING PROCESS WILL DOWNLOAD FILES
-  FROM DIFFERENT SOURCES WITH DIFFERENT COPYRIGHTS.
-  IF NOT STATED OTHERWISE ALL RIGHTS RESERVED TO THE AUTHORS." | #
-  sed 's/^[ ]*//'
-  read -p "I KNOW WHAT I'M DOING? [y/n] " ANSWER
-  if [ X$ANSWER != Xy ] ; then echo "BYE"; exit 1; \
-                          else echo; fi
+  if [ "$NONINTERACTIVE" != 1 ];then
+     echo -e "THE FOLLOWING PROCESS WILL DOWNLOAD FILES
+     FROM DIFFERENT SOURCES WITH DIFFERENT COPYRIGHTS.
+     IF NOT STATED OTHERWISE ALL RIGHTS RESERVED TO THE AUTHORS." | #
+     sed 's/^[ ]*//'
+     read -p "I KNOW WHAT I'M DOING? [y/n] " ANSWER
+     if [ X$ANSWER != Xy ] ; then echo "BYE"; exit 1; \
+                             else echo; fi
+  fi
 # ====================================================================== #
 
   for SRC in `find $SRCDIR -name "*.remote"`
