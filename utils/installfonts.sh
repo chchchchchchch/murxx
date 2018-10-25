@@ -17,6 +17,7 @@
        cd /etc/texmf/texmf.d
        touch 00_texmfhome.cnf
        echo "TEXMFHOME = ~/.TEXMF" > 00_texmfhome.cnf
+       mkdir /root/.TEXMF
        update-texmf
        TEXMFHOME=`kpsexpand \\$TEXMFHOME`
        cd -
@@ -35,7 +36,7 @@
   UPDMAP="$TEXMFHOME/web2c/updmap.cfg"
   for MAP in `find $TEXMFHOME -name "*.map" | #
               rev | cut -d "/" -f 1 | rev | sort -u`
-   do echo $MAP >> $UPDMAP
+   do echo "Map $MAP" >> $UPDMAP
   done
 # --------------------------------------------------------------------------- #
   sort -u -o $UPDMAP $UPDMAP
