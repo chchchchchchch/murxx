@@ -11,9 +11,15 @@
 # UNZIP AND MOVE TO TEXMFHOME
 # --------------------------------------------------------------------------- #
   TEXMFHOME=`kpsewhich --var-value=TEXMFHOME`
+  TEXMFHOME="adsd"
   if [ ! -d "$TEXMFHOME" ];then
-       echo "NO TEXMFHOME DIR":
-       exit 0;
+       echo "NO TEXMFHOME DIR"
+       cd /etc/texmf/texmf.d
+       touch 00_texmfhome.cnf
+       echo "TEXMFHOME = ~/.TEXMF" > 00_texmfhome.cnf
+       update-texmf
+       TEXMFHOME=`kpsexpand \\$TEXMFHOME`
+       cd -
   fi
 
   if [ -f $TMPDIR/tmp.zip ];then
