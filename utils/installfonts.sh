@@ -11,6 +11,10 @@
 # UNZIP AND MOVE TO TEXMFHOME
 # --------------------------------------------------------------------------- #
   TEXMFHOME=`kpsewhich --var-value=TEXMFHOME`
+  if [ ! -d "$TEXMFHOME" ];then
+       echo "NO TEXMFHOME DIR":
+       exit 0;
+  fi
 
   if [ -f $TMPDIR/tmp.zip ];then
        unzip -u -C $TMPDIR/tmp.zip "*.zip" -d $TMPDIR
@@ -25,12 +29,12 @@
   UPDMAP="$TEXMFHOME/web2c/updmap.cfg"
   for MAP in `find $TEXMFHOME -name "*.map" | #
               rev | cut -d "/" -f 1 | rev | sort -u`
-   do
-      echo $MAP >> $UPDMAP
+   do echo $MAP >> $UPDMAP
   done
-
+# --------------------------------------------------------------------------- #
   sort -u -o $UPDMAP $UPDMAP
-
+# --------------------------------------------------------------------------- #
+  updmap
 # --------------------------------------------------------------------------- #
 # CLEAN UP
 # --------------------------------------------------------------------------- #
