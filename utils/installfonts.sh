@@ -1,23 +1,22 @@
 #!/bin/bash
 
-  REMOTEZIP="https://fontain.org/junicode/export/tex/junicode.tex.zip"
+  REMOTEZIP="$1"
   TMPDIR="/tmp"
 # --------------------------------------------------------------------------- #
 # DOWNLOAD ZIP FILE
 # --------------------------------------------------------------------------- #
-  wget $REMOTEZIP -O $TMPDIR/tmp.zip
+  wget -q $REMOTEZIP -O $TMPDIR/tmp.zip
 
 # --------------------------------------------------------------------------- #
 # UNZIP AND MOVE TO TEXMFHOME
 # --------------------------------------------------------------------------- #
   TEXMFHOME=`kpsewhich --var-value=TEXMFHOME`
-  TEXMFHOME="adsd"
   if [ ! -d "$TEXMFHOME" ];then
        echo "NO TEXMFHOME DIR"
        cd /etc/texmf/texmf.d
        touch 00_texmfhome.cnf
        echo "TEXMFHOME = ~/.TEXMF" > 00_texmfhome.cnf
-       mkdir /root/.TEXMF
+       mkdir ~/.TEXMF
        update-texmf
        TEXMFHOME=`kpsexpand \\$TEXMFHOME`
        cd -
