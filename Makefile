@@ -6,3 +6,6 @@ lokal:
 
 junicode:
 	./utils/installfonts.sh https://fontain.org/junicode/export/tex/junicode.tex.zip
+
+
+pdf: lokal junicode 181008_dev

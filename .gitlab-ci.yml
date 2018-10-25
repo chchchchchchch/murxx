@@ -1,0 +1,35 @@
+image: debian:wheezy
+
+before_script:
+  - export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
+  - export LC_ALL=C.UTF-8 LANGUAGE=C LANG=C
+
+stages:
+  - build
+    #  - deploy
+  
+build-font:
+  stage: build
+  script:
+    - apt-get update
+    - apt-get install -y --no-install-recommends  texlive-latex-base texlive-latex-extra texlive-lang-german texlive-fonts-recommended texlive-extra-utils texlive-bibtex-extra etoolbox pandoc biber make wget curl file unzip coreutils realpath
+    - make pdf
+  artifacts:
+    paths:
+      - E/181008_dev.pdf
+      
+        # pages:
+        #   stage: deploy
+        #   script:
+        #     - mkdir .public
+        #     - cp -r html-specimen/* .public
+        #     - cp -rf *.ttf .public/fonts
+        #     - cp -rf *.otf .public/fonts
+        #     - cp -rf *.sfd .public/fonts
+        #     - mv .public public
+        #   artifacts:
+        #     paths:
+        #       - public
+        #   only:
+        #     - master
+        # 
