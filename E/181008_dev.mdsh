@@ -1,5 +1,6 @@
 % --------------------------------------------------------------------------- %
-% EXTENDFUNCTIONS: ../lib/mdsh/book-A5.functions
+% EXTENDFUNCTIONS: 181025_booklet.functions
+% EXTENDFUNCTIONS: 181008_basic.functions
 % EXTENDFUNCTIONS: ../lib/mdsh/keywordize.functions
 % --------------------------------------------------------------------------- %
 % USEPACKAGE: ../lib/tex/conditions
@@ -12,11 +13,8 @@
 % PDFXORG: LAFKON Publishing
 % MKPDFXCOMPLIANT:
 % ----
-% EXTENDFUNCTIONS: 181008_basic.functions
-% ----
 % USEPACKAGE: 181008_basic
 % --------------------------------------------------------------------------- %
-
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
