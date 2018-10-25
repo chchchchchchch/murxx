@@ -3,3 +3,6 @@
 
 lokal:
 	./utils/lokalize.sh --non-interactive
+
+junicode:
+	./utils/installfonts.sh https://fontain.org/junicode/export/tex/junicode.tex.zip
