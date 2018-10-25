@@ -6,4 +6,4 @@ E/*.html
 src/**/*.*
 !src/**/*.xmp
 !src/**/*.remote
-
+tmp/
