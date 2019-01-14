@@ -12,7 +12,7 @@ build-pdf:
   stage: build
   script:
     - apt-get update
-    - apt-get install -y --no-install-recommends  texlive-latex-base texlive-latex-extra texlive-lang-german texlive-fonts-recommended texlive-extra-utils texlive-bibtex-extra etoolbox pandoc biber make wget curl file unzip coreutils realpath
+    - apt-get install -y --no-install-recommends  texlive-latex-base texlive-latex-extra texlive-lang-german texlive-fonts-recommended texlive-extra-utils texlive-bibtex-extra etoolbox pandoc biber make wget curl file unzip coreutils realpath ghostscript inkscape imagemagick pdftk poppler-utils
     - make pdf
   artifacts:
     paths:

@@ -20,12 +20,13 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     curl \
     file \
     unzip \
+    git \
     ghostscript \
     inkscape \
     imagemagick \
     pdftk \
-    poppler-utils \
-    git
+    poppler-utils
+
 
 # things that wheezy doesn't have per default
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
