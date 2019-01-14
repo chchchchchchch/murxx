@@ -110,7 +110,7 @@ function MKPDFXCOMPLIANT() {
 
 function FRONTCOVER() {
 
-  CROP="10.63";CANVASWIDTH="545.66"
+  CROP="0.00";CANVASWIDTH="481.88"
   SVGSRC="$1";SVGGET=${TMPID}`echo $PDFSRC | md5sum | cut -c 1-4`.svg
   if [ ! -f $SVGGET ]; then getFile $SVGSRC $SVGGET ;fi
   OUT=$TMPID`echo $SVGGET | md5sum | cut -c 1-8`.lines
@@ -152,7 +152,7 @@ function FRONTCOVER() {
 
 function BACKCOVER() {
 
-  CROP="10.63";CANVASWIDTH="545.66876"
+  CROP="0.00";CANVASWIDTH="481.88"
   SVGSRC="$1";SVGGET=${TMPID}`echo $PDFSRC | md5sum | cut -c 1-4`.svg
   if [ ! -f $SVGGET ]; then getFile $SVGSRC $SVGGET ;fi
   OUT=$TMPID`echo $SVGGET | md5sum | cut -c 1-8`.lines
