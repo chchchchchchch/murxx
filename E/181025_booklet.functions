@@ -65,14 +65,21 @@ function MKPDFXCOMPLIANT() {
         echo '\newcount\vs
               \newcount\vsi
               \newcommand\clearforend{
-               \mbox{}\clearpage
-               \pagestyle{empty}
-               \vs\thepage
-               \advance\vs by 3
-               \vsi\vs
-               \divide\vs by 4
-               \multiply\vs by 4
-              \ifnum\vs=\vsi\else\clearforend\fi
+                 \newpage
+                 \pagestyle{empty}
+                 \vs\thepage
+                 \advance\vs by 3
+                 \vsi\vs
+                 \divide\vs by 4
+                 \multiply\vs by 4
+                 \ifnum\vs=\vsi
+                  % DO NOTHING
+                 \else
+                  % FORCE EMPTY PAGE
+                  \mbox{}\clearpage 
+                  % CALCULATE AGAIN
+                  \clearforend
+                 \fi
         }' >> ${TMPID}.preamble
   fi
 # --------------------------------------------------------------------------- #
