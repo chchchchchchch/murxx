@@ -17,7 +17,7 @@
 % --------------------------------------------------------------------------- %
 %!ADD2PREAMBLE: \usepackage{showframe}
 
-% FRONTCOVER: 190114_Jacket.svg
+% FRONTCOVER: 190114_jacket.svg
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -36,6 +36,6 @@ non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 % HYPHENATE: Tech-ni-ker_in-nen
 
 
-% BACKCOVER: 190114_Jacket.svg
+% BACKCOVER: 190114_jacket.svg
 
 
