@@ -1,6 +1,7 @@
 % --------------------------------------------------------------------------- %
 % EXTENDFUNCTIONS: 181025_booklet.functions
 % EXTENDFUNCTIONS: 181008_basic.functions
+% EXTENDFUNCTIONS: 190114_page.functions
 % EXTENDFUNCTIONS: ../lib/mdsh/keywordize.functions
 % --------------------------------------------------------------------------- %
 % USEPACKAGE: ../lib/tex/conditions
@@ -35,7 +36,10 @@ non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 % HYPHENATE: Kol-le-g_in-nen
 % HYPHENATE: Tech-ni-ker_in-nen
 
+% SPREAD: 190114_pages.svg 2-6
+% SPREAD: 190114_pages.svg 7
+
+% Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 
 % BACKCOVER: 190114_jacket.svg
-
 
