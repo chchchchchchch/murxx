@@ -4,8 +4,10 @@
 lokal:
 	./utils/lokalize.sh --non-interactive
 
-junicode:
-	./utils/installfonts.sh https://fontain.org/junicode/export/tex/junicode.tex.zip
+font-junicode:
+	./utils/installfonts.sh --tex https://fontain.org/junicode/export/tex/junicode.tex.zip
+font-bangers:
+	./utils/installfonts.sh --ttf https://github.com/google/fonts/raw/master/ofl/bangers/Bangers-Regular.ttf
 
 
-pdf: lokal junicode 181008_dev
+pdf: lokal font-junicode font-bangers 181008_dev
