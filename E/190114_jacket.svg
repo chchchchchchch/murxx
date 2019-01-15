@@ -33,9 +33,9 @@
      id="namedview4"
      showgrid="false"
      inkscape:zoom="0.35616741"
-     inkscape:cx="213.25171"
+     inkscape:cx="486.99938"
      inkscape:cy="333.87006"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="g3113"
      units="px"
      guidecolor="#ff0000"
      guideopacity="0.47058824"
@@ -154,27 +154,29 @@
      inkscape:label="AUSSEN"
      style="display:inline"
      sodipodi:insensitive="true"><text
-       xml:space="preserve"
-       style="font-size:46.4069519px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:0.5px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bangers;-inkscape-font-specification:Bangers"
-       x="688.18237"
-       y="101.58249"
-       id="text3084"
-       sodipodi:linespacing="100%"><tspan
-         sodipodi:role="line"
-         id="tspan3086"
-         x="688.18237"
-         y="101.58249">AUSSEN FRONT</tspan></text>
+   xml:space="preserve"
+   style="font-size:46.4069519px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:0.5px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bangers;-inkscape-font-specification:Bangers"
+   x="688.18237"
+   y="101.58249"
+   id="text3084"
+   sodipodi:linespacing="100%"><tspan
+     sodipodi:role="line"
+     id="tspan3086"
+     x="688.18237"
+     y="101.58249">AUSSEN FRONT</tspan></text>
+
 <text
-       sodipodi:linespacing="100%"
-       id="text3088"
-       y="101.58249"
-       x="57.182373"
-       style="font-size:46.4069519px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:0.5px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bangers;-inkscape-font-specification:Bangers"
-       xml:space="preserve"><tspan
-         y="101.58249"
-         x="57.182373"
-         id="tspan3090"
-         sodipodi:role="line">AUSSEN BACK</tspan></text>
+   sodipodi:linespacing="100%"
+   id="text3088"
+   y="101.58249"
+   x="57.182373"
+   style="font-size:46.4069519px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:0.5px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bangers;-inkscape-font-specification:Bangers"
+   xml:space="preserve"><tspan
+     y="101.58249"
+     x="57.182373"
+     id="tspan3090"
+     sodipodi:role="line">AUSSEN BACK</tspan></text>
+
 </g><g
      inkscape:groupmode="layer"
      id="layer3"
@@ -195,25 +197,27 @@
      id="g3113"
      inkscape:groupmode="layer"
      sodipodi:insensitive="true"><text
-       sodipodi:linespacing="100%"
-       id="text3115"
-       y="101.58249"
-       x="716.18237"
-       style="font-size:46.4069519px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:0.5px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bangers;-inkscape-font-specification:Bangers"
-       xml:space="preserve"><tspan
-         y="101.58249"
-         x="716.18237"
-         id="tspan3117"
-         sodipodi:role="line">INNEN FRONT</tspan></text>
+   sodipodi:linespacing="100%"
+   id="text3115"
+   y="101.58249"
+   x="716.18237"
+   style="font-size:46.4069519px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:0.5px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bangers;-inkscape-font-specification:Bangers"
+   xml:space="preserve"><tspan
+     y="101.58249"
+     x="716.18237"
+     id="tspan3117"
+     sodipodi:role="line">INNEN BACK</tspan></text>
+
 <text
-       xml:space="preserve"
-       style="font-size:46.4069519px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:0.5px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bangers;-inkscape-font-specification:Bangers"
-       x="57.182373"
-       y="101.58249"
-       id="text3119"
-       sodipodi:linespacing="100%"><tspan
-         sodipodi:role="line"
-         id="tspan3121"
-         x="57.182373"
-         y="101.58249">INNEN BACK</tspan></text>
+   xml:space="preserve"
+   style="font-size:46.4069519px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:0.5px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bangers;-inkscape-font-specification:Bangers"
+   x="57.182373"
+   y="101.58249"
+   id="text3119"
+   sodipodi:linespacing="100%"><tspan
+     sodipodi:role="line"
+     id="tspan3121"
+     x="57.182373"
+     y="101.58249">INNEN FRONT</tspan></text>
+
 </g></svg>
