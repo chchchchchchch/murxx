@@ -15,7 +15,7 @@ function PDFXAUTHOR() { THISPDFXAUTHOR="$*"; }
 function PDFXORG()    { THISPDFXORG="$*";    }
 function MKPDFXCOMPLIANT() {
 
-  COLORPROFILE="$INCLUDEPATH/../lib/icc/FOGRA39L.icc"
+  ICC="$INCLUDEPATH/../lib/icc/Adobe_ICC_Profiles/CMYK/CoatedFOGRA39.icc"
 
   pdfxrequired() {
 
@@ -24,7 +24,7 @@ function MKPDFXCOMPLIANT() {
      echo "\usepackage[x-1a]{pdfx}"                     >> ${TMPID}.preamble
      echo "<?xpacket begin=''
             id='W5M0MpCehiHzreSzNTczkc9d'?>"            > $TMPDIR/pdfx-1a.xmp
-     cp "$COLORPROFILE" $TMPDIR
+     cp "$ICC" $TMPDIR/FOGRA39L.icc
      echo "\Keywords{pdfTeX\sep PDF/X-1a\sep PDF/A-b}
      \Title{${THISPDFXTITLE}}
      \Author{${THISPDFXAUTHOR}}
