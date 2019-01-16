@@ -1,5 +1,8 @@
 # http://freeze.sh/_/2016/preflight
 
+  ADOBEICC="$SHDIR/../icc/Adobe_ICC_Profiles"
+   ICCCMYK="$ADOBEICC/RGB/VideoHD.icc"
+
   function pdfxgs() {
 
        #PDF=$1
@@ -46,6 +49,7 @@
              -sDEVICE=pdfwrite                    \
              -sColorConversionStrategy=CMYK       \
              -sProcessColorModel=DeviceCMYK       \
+             -sOutputICCProfile=$ICCCMYK          \
              -sColorImageDownsampleThreshold=2    \
              -sColorImageDownsampleType=Bicubic   \
              -sColorImageResolution=300           \
