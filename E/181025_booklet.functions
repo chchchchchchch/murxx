@@ -132,9 +132,14 @@ function FRONTCOVER() {
   echo "</g></svg>"           >> supertmp.svg
   sed -i "s/$BFOO/\n/g" supertmp.svg
   sed -i "s/$SFOO/ /g"  supertmp.svg
-  inkscape --export-pdf=1.pdf \
-           --export-text-to-path supertmp.svg
-  conformColor 1.pdf
+
+  SVGINFO=`svgAnalyse supertmp.svg`
+  if [ "$SVGINFO" == "RGBK" ];then rgbk supertmp.svg 1.pdf
+  else inkscape --export-pdf=1.pdf --export-text-to-path supertmp.svg;fi
+  if   [ "$SVGINFO" == "K" ];then pdfxgs 1.pdf
+  elif [ "$SVGINFO" == "RGB" ];then pdfxcmyk 1.pdf sRGBz.icc
+  else conformColor 1.pdf; fi
+
   XSHIFT="-$CROP"
   TRANSFORM="transform=\"translate($XSHIFT,0)\""
   head -n 1 $OUT              >  supertmp.svg
@@ -143,11 +148,15 @@ function FRONTCOVER() {
   echo "</g></svg>"           >> supertmp.svg
   sed -i "s/$BFOO/\n/g" supertmp.svg
   sed -i "s/$SFOO/ /g"  supertmp.svg
-  inkscape --export-pdf=2.pdf \
-           --export-text-to-path supertmp.svg
-  conformColor 2.pdf
-  pdftk 1.pdf 2.pdf cat output ${TMPID}frontcover.pdf
 
+  SVGINFO=`svgAnalyse supertmp.svg`
+  if [ "$SVGINFO" == "RGBK" ];then rgbk supertmp.svg 2.pdf
+  else inkscape --export-pdf=2.pdf --export-text-to-path supertmp.svg;fi
+  if   [ "$SVGINFO" == "K" ];then pdfxgs 2.pdf
+  elif [ "$SVGINFO" == "RGB" ];then pdfxcmyk 2.pdf sRGBz.icc
+  else conformColor 2.pdf; fi
+
+  pdftk 1.pdf 2.pdf cat output ${TMPID}frontcover.pdf
   write2src "\includepdf[scale=1,pages=1-2]{${TMPID}frontcover.pdf}"
   write2src "\setcounter{page}{1}"
 
@@ -174,9 +183,14 @@ function BACKCOVER() {
   echo "</g></svg>"           >> supertmp.svg
   sed -i "s/$BFOO/\n/g" supertmp.svg
   sed -i "s/$SFOO/ /g"  supertmp.svg
-  inkscape --export-pdf=2.pdf \
-           --export-text-to-path supertmp.svg
-  conformColor 2.pdf
+
+  SVGINFO=`svgAnalyse supertmp.svg`
+  if [ "$SVGINFO" == "RGBK" ];then rgbk supertmp.svg 2.pdf
+  else inkscape --export-pdf=2.pdf --export-text-to-path supertmp.svg;fi
+  if   [ "$SVGINFO" == "K" ];then pdfxgs 2.pdf
+  elif [ "$SVGINFO" == "RGB" ];then pdfxcmyk 2.pdf sRGBz.icc
+  else conformColor 2.pdf; fi
+
   XSHIFT="-$CROP"
   TRANSFORM="transform=\"translate($XSHIFT,0)\""
   head -n 1 $OUT              >  supertmp.svg
@@ -185,9 +199,14 @@ function BACKCOVER() {
   echo "</g></svg>"           >> supertmp.svg
   sed -i "s/$BFOO/\n/g" supertmp.svg
   sed -i "s/$SFOO/ /g"  supertmp.svg
-  inkscape --export-pdf=1.pdf \
-           --export-text-to-path supertmp.svg
-  conformColor 1.pdf
+
+  SVGINFO=`svgAnalyse supertmp.svg`
+  if [ "$SVGINFO" == "RGBK" ];then rgbk supertmp.svg 1.pdf
+  else inkscape --export-pdf=1.pdf --export-text-to-path supertmp.svg;fi
+  if   [ "$SVGINFO" == "K" ];then pdfxgs 1.pdf
+  elif [ "$SVGINFO" == "RGB" ];then pdfxcmyk 1.pdf sRGBz.icc
+  else conformColor 1.pdf; fi
+
   pdftk 2.pdf 1.pdf cat output ${TMPID}backcover.pdf
 
   write2src "\clearforend"
