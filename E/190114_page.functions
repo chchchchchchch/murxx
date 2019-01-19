@@ -1,4 +1,121 @@
 # --------------------------------------------------------------------------- #
+  function svgAnalyse() {
+ 
+  ( HASIMG="";HASCOLOR=""   # RESET (?)
+    HASBLACK="";HASWHITE="" # RESET (?)
+    SVG=`echo $* | sed 's/ /\n/g' | #
+         grep "\.svg$" | head -n 1` #
+ 
+    for COLOR in `cat $SVG                           | #
+                  sed 's/fill:/:M:/g'                | #
+                  sed 's/stroke:/:M:/g'              | #
+                  sed 's/:M:#[a-f0-9]\{6\}/\n:&\n/g' | #
+                  grep "^::M" | cut -c 5-11 | uniq`    #
+     do R=`echo $COLOR | cut -c 2-3` #
+        G=`echo $COLOR | cut -c 4-5` #
+        B=`echo $COLOR | cut -c 6-7` #
+        K=`echo -e "$R$G$B"     | #
+           egrep -v "^[fF]{6}$" | #
+           sed 's/../&\n/g'     | #
+           sed '/^$/d'          | #
+           uniq | wc -l`          #
+
+           if   [ "$K" == 1 ]
+           then HASBLACK="YES"    #
+           elif [ "$K" == 0 ]
+           then HASWHITE="YES"    #
+           else HASCOLOR="YES"    #
+           fi
+    done
+
+    HASIMG=`grep xlink:href $SVG | wc -l`
+    if [ "$HASIMG" == 1 ];then HASIMG=" +IMG";else HASIMG="";fi
+    
+    if [ "$HASBLACK" != "YES" ] &&
+       [ "$HASCOLOR" != "YES" ];then  echo "K$HASIMG";fi
+    if [ "$HASBLACK" == "YES" ] &&
+       [ "$HASCOLOR" != "YES" ];then  echo "K$HASIMG";fi
+    if [ "$HASBLACK" != "YES" ] &&
+       [ "$HASCOLOR" == "YES" ];then  echo "RGB$HASIMG" ;fi
+    if [ "$HASBLACK" == "YES" ] &&
+       [ "$HASCOLOR" == "YES" ];then  echo "RGBK$HASIMG";fi
+
+   )
+  }
+# --------------------------------------------------------------------------- #
+  function rgbk() {
+ 
+  ( SVG=`echo $* | sed 's/ /\n/g' | #
+         grep "\.svg$" | head -n 1` #
+    PDF=`echo $* | sed 's/ /\n/g' | #
+         grep "\.pdf$" | tail -n 1` #
+    TMPRGBK=`echo $SVG | sed 's/\.svg$/tmp/g'`
+ 
+    CNT=0 # RESET
+    for LN in `egrep -n ":#[a-f0-9]{6}" $SVG | cut -d ":" -f 1`
+     do  for HEX in `sed -n "${LN}p" $SVG               | #
+                     sed 's/fill:/:M:/g'                | #
+                     sed 's/stroke:/:M:/g'              | #
+                     sed 's/:M:#[a-f0-9]\{6\}/\n:&\n/g' | #
+                     grep "^::M" | cut -c 5-11 | uniq`    #       
+          do N=`echo 000000000000$CNT | #
+                rev | cut -c 1-9 | rev` # 
+             R=`echo $HEX | cut -c 2-3` #
+             G=`echo $HEX | cut -c 4-5` #
+             B=`echo $HEX | cut -c 6-7` #
+             K=`echo -e "$R$G$B"      | #
+                egrep -v "^[fF]{6}$"  | #
+                sed 's/../&\n/g'      | #
+                sed '/^$/d'           | #
+                uniq | wc -l`           #
+             if [ "$K" == 1 ]
+              then INK="BLACK";else INK="COLOR";fi
+             if [ "$INK" != "$INKPREV" ]
+             then #echo "START NEW STAPLE   ($INK)"
+                  COLLECT="${TMPRGBK}.${N}.${INK}.svg" #
+                  sed "${LN}s/$HEX/P:ROTEC:T/g" $SVG | #
+                  sed "s/#[a-f0-9]\{6\}/none/g"      | #
+                  sed "s/P:ROTEC:T/$HEX/g" > $COLLECT  #
+                  CNT=`expr $CNT + 1`                  #
+             else #echo "ADD TO STAPLE      ($INK)"
+                  GETSRC=`grep -n "" $SVG | grep "^$LN" | #
+                          cut -d ":" -f 2-              | #
+                          sed "s/$HEX/P:ROTEC:T/g"      | #
+                          sed "s/#[a-f0-9]\{6\}/none/g" | #
+                          sed "s/P:ROTEC:T/$HEX/g"`       #
+                  sed -i "${LN}s|^.*$|$GETSRC|g"   $COLLECT
+             fi
+             INKPREV="$INK"
+    done;done
+   
+    for STAPLE in `ls ${TMPRGBK}.*.svg | #
+                   egrep ".*\.[0-9]+\.[BLAORKC]+\.svg"`
+     do  INK=`basename $STAPLE | #
+              cut -d "." -f 3`   #
+         TMPPDF="${TMPRGBK}.pdf"
+         COLLECT="${TMPRGBK}.collect.pdf"
+         inkscape --export-pdf=$TMPPDF $STAPLE
+         if [ "$INK" == "BLACK" ]
+         then pdfxgs   $TMPPDF           # echo "THIS IS BLACK"
+         else pdfxcmyk $TMPPDF sRGBz.icc # echo "THIS IS COLOR"
+         fi
+         if [ ! -f $COLLECT ]
+         then cp $TMPPDF $COLLECT
+         else pdftk $TMPPDF      \
+              background $COLLECT \
+              output ${TMPRGBK}.tmp.pdf
+              mv ${TMPRGBK}.tmp.pdf $COLLECT
+         fi
+    done
+   
+    mv $COLLECT $PDF;pdfxcmyk $PDF 
+    if [ `echo ${TMPRGBK} | wc -c` -ge 4 ] &&
+       [ `ls ${TMPRGBK}*.* 2>/dev/null | wc -l` -gt 0 ]
+    then  rm ${TMPRGBK}*.* ;fi   
+ 
+   )
+  }
+# --------------------------------------------------------------------------- #
   function svglayers2pdfpages() {
 
      CROP="0.00" # 3mm in px
@@ -69,10 +186,23 @@
                 iconv -f utf-8 -t us-ascii//TRANSLIT | #
                 $PANDOCACTION    >  $PDFPAGES.${NUM}.txt
               # ------------------------------------------------------------ #
-                inkscape --export-pdf=${TMPID}_${NUM}_${LNAME}.pdf \
-                         --export-text-to-path ${TMPID}_${NUM}_${LNAME}.svg
-                conformColor ${TMPID}_${NUM}_${LNAME}.pdf
-                rm ${TMPID}_${NUM}_${LNAME}.svg
+                PAGENAME="${TMPID}_${NUM}_${LNAME}"
+                SVGINFO=`svgAnalyse ${PAGENAME}.svg`
+
+                if [ "$SVGINFO" == "RGBK" ]
+                 then rgbk ${PAGENAME}.svg ${PAGENAME}.pdf
+                 else inkscape --export-pdf=${PAGENAME}.pdf \
+                               --export-text-to-path ${PAGENAME}.svg
+                fi
+
+                if   [ "$SVGINFO" == "K" ]
+                 then   pdfxgs ${PAGENAME}.pdf
+                elif [ "$SVGINFO" == "RGB" ]
+                 then   pdfxcmyk ${PAGENAME}.pdf sRGBz.icc
+                else    conformColor ${PAGENAME}.pdf
+                fi
+
+                rm ${PAGENAME}.svg
              COUNT=`expr $COUNT + 1`
          done
      done
@@ -191,6 +321,7 @@ function SPREAD() {
             write2src "}"
         done
    fi
+
 }
 
 # --------------------------------------------------------------------------- #
