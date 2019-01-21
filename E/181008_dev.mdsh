@@ -1,7 +1,7 @@
 % --------------------------------------------------------------------------- %
-% EXTENDFUNCTIONS: 181025_booklet.functions
 % EXTENDFUNCTIONS: 181008_basic.functions
 % EXTENDFUNCTIONS: 190114_page.functions
+% EXTENDFUNCTIONS: 181025_booklet.functions
 % EXTENDFUNCTIONS: ../lib/mdsh/keywordize.functions
 % --------------------------------------------------------------------------- %
 % USEPACKAGE: ../lib/tex/conditions
@@ -37,11 +37,13 @@ non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 % HYPHENATE: Tech-ni-ker_in-nen
 
 % SPREAD: 190114_pages.svg 2-6
-% SPREAD: 190114_pages.svg 7
+% SPREAD: 190114_pages.svg 7-10
+
+% SPREAD: 190119_murlogo.svg 1-6
 
 % Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 
-% SPREAD: https://lafkon.net/exchange/mur/190114/190114_pages.pdf 2-4
+%!SPREAD: https://lafkon.net/exchange/mur/190114/190114_pages.pdf 2-4
 
 % BACKCOVER: 190114_jacket.svg
 
