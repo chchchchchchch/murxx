@@ -12,6 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     texlive-fonts-recommended \
     texlive-extra-utils \
     texlive-bibtex-extra \
+    latex-xcolor \
     etoolbox \
     pandoc \
     biber \
