@@ -13,7 +13,10 @@ font-junicode:
 font-bangers:
 	./utils/installfonts.sh --ttf https://github.com/google/fonts/raw/master/ofl/bangers/Bangers-Regular.ttf
 font-iaduospace:
+	./utils/installfonts.sh --tex https://fontain.org/iaduospace/export/tex/ia-writer-duospace.tex.zip
 	./utils/installfonts.sh --ttf https://fontain.org/iaduospace/export/ttf/ia-writer-duospace.ttf.zip
 
 
+
 pdf: lokal font-junicode font-bangers 181008_dev
+
