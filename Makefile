@@ -21,5 +21,6 @@ font-plexmono:
 	./utils/installfonts.sh --tex https://fontain.org/plexmono/export/tex/ibm-plex-mono.tex.zip
 	./utils/installfonts.sh --ttf https://fontain.org/plexmono/export/ttf/ibm-plex-mono.ttf.zip 
 
-pdf: lokal font-junicode font-bangers 181008_dev
+#pdf: lokal font-junicode font-bangers 181008_dev
+pdf: lokal font-junicode font-bangers font-iaduospace font-worksans font-plexmono 190121_dev
 
