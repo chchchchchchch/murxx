@@ -15,7 +15,8 @@ font-bangers:
 font-iaduospace:
 	./utils/installfonts.sh --tex https://fontain.org/iaduospace/export/tex/ia-writer-duospace.tex.zip
 	./utils/installfonts.sh --ttf https://fontain.org/iaduospace/export/ttf/ia-writer-duospace.ttf.zip
-
+font-worksans:
+	./utils/installfonts.sh --ttf https://www.fontsquirrel.com/fonts/download/work-sans.zip
 
 
 pdf: lokal font-junicode font-bangers 181008_dev
