@@ -32,8 +32,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     coreutils \
     realpath
 
-RUN sudo echo "Europe/Berlin" > /etc/timezone
-RUN sudo dpkg-reconfigure -f noninteractive tzdata
+RUN echo "Europe/Berlin" > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
 
 WORKDIR "/murxx"
 CMD ["make", "pdf"]

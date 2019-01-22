@@ -13,6 +13,7 @@ build-pdf:
   script:
     - apt-get update
     - apt-get install -y --no-install-recommends  texlive-latex-base texlive-latex-extra texlive-lang-german texlive-fonts-recommended texlive-extra-utils texlive-bibtex-extra etoolbox pandoc biber make wget curl file unzip coreutils realpath ghostscript inkscape imagemagick pdftk poppler-utils
+    - echo "Europe/Berlin" > /etc/timezone; dpkg-reconfigure -f noninteractive tzdata
     - make pdf
   artifacts:
     paths:
