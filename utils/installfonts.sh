@@ -44,7 +44,10 @@
                unzip -u -C $TMPDIR/tmp.zip "*.zip" -d $TMPDIR
                rm $TMPDIR/tmp.zip
                unzip -u -C $TMPDIR/*.zip "TEXMF/*" -d $TMPDIR
-               cp -rp ${TMPDIR}/TEXMF/* $TEXMFHOME
+               rsync -a ${TMPDIR}/TEXMF/ $TEXMFHOME
+               if [ -d "${TMPDIR}/TEXMF" ]
+               then rm -rf ${TMPDIR}/TEXMF ; rm $TMPDIR/*.zip
+               fi
           fi
         # ----------------------------------------------------------- #
         # UPDATE TEX INSTALLATION
@@ -63,22 +66,17 @@
  
  # -------------------------------------------------------------------- #
    if [ "$MODUS" == TTF ] # ========================================= #
-   then # ----------------------------------------------------------- #
-          mkdir -p ~/.fonts/murxx
-
+   then   mkdir -p ~/.fonts/murxx
+        # ----------------------------------------------------------- #
           ISZIP=`echo $REMOTEGET | grep ".zip$" | wc -l`
           if [ "$ISZIP" == 1 ]
           then unzip $REMOTEGET -d ~/.fonts/murxx
           else cp $REMOTEGET ~/.fonts/murxx
           fi
         # ----------------------------------------------------------- #
+          rm $REMOTEGET
    fi # ============================================================= #
  # -------------------------------------------------------------------- #
-
-# --------------------------------------------------------------------------- #
-# CLEAN UP
-# --------------------------------------------------------------------------- #
-  rm $REMOTEGET
 
 exit 0;
 
