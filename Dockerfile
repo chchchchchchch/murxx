@@ -26,7 +26,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     inkscape \
     imagemagick \
     pdftk \
-    poppler-utils
+    poppler-utils \
+    rsync
 
 # things that wheezy doesn't have per default
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \

@@ -12,7 +12,7 @@ build-pdf:
   stage: build
   script:
     - apt-get update
-    - apt-get install -y --no-install-recommends  texlive-latex-base texlive-latex-extra texlive-lang-german texlive-fonts-recommended texlive-extra-utils texlive-bibtex-extra latex-xcolor etoolbox pandoc biber make wget curl file unzip coreutils realpath ghostscript inkscape imagemagick pdftk poppler-utils
+    - apt-get install -y --no-install-recommends  texlive-latex-base texlive-latex-extra texlive-lang-german texlive-fonts-recommended texlive-extra-utils texlive-bibtex-extra latex-xcolor etoolbox pandoc biber make wget curl file unzip coreutils realpath ghostscript inkscape imagemagick pdftk poppler-utils rsync
     - echo "Europe/Berlin" > /etc/timezone; dpkg-reconfigure -f noninteractive tzdata
     - make pdf
     - mv E/190121_dev.pdf 190121_dev.pdf
