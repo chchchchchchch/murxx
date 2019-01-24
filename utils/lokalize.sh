@@ -5,7 +5,7 @@
 #       check for README/LICENSE AT REMOTE LOCATION
 # ====================================================================== #
   SRCDIR=`echo $* | grep "/" | head -n 1`
-  NONINTERACTIVE=`echo $* | grep -- "--non-interactive" | wc -l`
+  NONINTERACTIVE=`echo $* | grep -- "-q" | wc -l`
 # ---------------------------------------------------------------------- #
   if [ ! -d $SRCDIR ]
    then echo "----"; echo "$SRCDIR NOT A DIRECTORY."

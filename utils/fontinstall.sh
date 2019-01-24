@@ -1,8 +1,38 @@
 #!/bin/bash
 
   TMPDIR="/tmp"
-  REMOTESRC=`echo $* | sed 's/ /\n/g' | grep -v -- "^--" | tail -n 1`
-  REMOTEGET="$TMPDIR/"`basename $REMOTESRC`
+  NONINTERACTIVE=`echo $* | grep -- "-q" | wc -l` # QUIET
+# ----
+  if [ "$NONINTERACTIVE" != 1 ];then
+     echo -e ":NN:\e[31mTHE FOLLOWING PROCESS WILL DOWNLOAD AND :NN:INSTALL
+              FONT FILES FROM REMOTE SOURCES :NN: AND MAY OVERWRITE 
+              EXISTING CONFIGURATIONS.\e[0m:NN:" | #
+     sed ':a;N;$!ba;s/\n//g' | tr -s ' '    | #
+     sed 's/:NN:/\n/g' | sed 's/^[ ]*//'
+     read -p "I KNOW WHAT I'M DOING? [y/n] " ANSWER
+     if [ "$ANSWER" != "y" ];then echo -e "\nCIAO.\n";exit 0;else echo;fi
+  fi
+# ----
+  if   [ `echo $* | sed 's/ /\n/g' | #
+          egrep -- "^--tex|^--ttf" | #
+          wc -l` -lt 1 ];then 
+  echo -e "\e[31mfontinstall.sh CURRENTLY SUPPORTS --tex OR --ttf\e[0m" 
+  echo -e "\e[31mUSAGE:\e[0m ./fontinstall --tex  \
+   https://fontain.org/iaduospace/export/tex/ia-writer-duospace.tex.zip \
+  :NI: ./fontinstall --ttf \
+   https://fontain.org/plexmono/export/ttf/ibm-plex-mono.ttf.zip" | #
+  tr -s ' ' | sed 's/:NI:/\n      /g'
+
+  exit 0
+  fi
+# ----
+  REMOTESRC=`echo $* | sed 's/ /\n/g' | grep -v -- "^-" | tail -n 1`
+  if [ "$REMOTESRC" != "" ]
+  then REMOTEGET="$TMPDIR/"`basename $REMOTESRC`
+  else exit 0;
+  fi
+
+
 # --------------------------------------------------------------------------- #
 # DOWNLOAD REMOTE SRC
 # --------------------------------------------------------------------------- #
@@ -41,9 +71,9 @@
           fi
         
           if [ -f $TMPDIR/tmp.zip ];then
-               unzip -u -C $TMPDIR/tmp.zip "*.zip" -d $TMPDIR
+               unzip -qo -u -C $TMPDIR/tmp.zip "*.zip" -d $TMPDIR
                rm $TMPDIR/tmp.zip
-               unzip -u -C $TMPDIR/*.zip "TEXMF/*" -d $TMPDIR
+               unzip -qo -u -C $TMPDIR/*.zip "TEXMF/*" -d $TMPDIR
                rsync -a ${TMPDIR}/TEXMF/ $TEXMFHOME
                if [ -d "${TMPDIR}/TEXMF" ]
                then rm -rf ${TMPDIR}/TEXMF ; rm $TMPDIR/*.zip
@@ -70,7 +100,7 @@
         # ----------------------------------------------------------- #
           ISZIP=`echo $REMOTEGET | grep ".zip$" | wc -l`
           if [ "$ISZIP" == 1 ]
-          then unzip $REMOTEGET -d ~/.fonts/murxx
+          then unzip -qo $REMOTEGET -d ~/.fonts/murxx
           else cp $REMOTEGET ~/.fonts/murxx
           fi
         # ----------------------------------------------------------- #
