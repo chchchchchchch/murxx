@@ -79,7 +79,7 @@
   % https://groups.google.com/forum/#!topic/pandoc-discuss/O-N0H1eBnVU
   \let\oldhref=\href 
   \renewcommand{\href}[2]{#2\footnote{%
-               {\fontfamily{ipm}\selectfont\color{magenta}%
+               {\fontfamily{ipm}\selectfont\color{risoone}%
                 \footnotesize\seqsplit{#1}}}}
 
   \DeclareUnicodeCharacter{00A0}{\,}
@@ -87,7 +87,7 @@
 % --------------------------------------------------------------------------- %
 %  C O L O R S
 % --------------------------------------------------------------------------- %
-  \definecolor{magenta}{cmyk}{0,1,0,0}
+  \definecolor{risoone}{cmyk}{1,0,0,0}
 
 % --------------------------------------------------------------------------- %
 %  F O N T S
@@ -169,7 +169,7 @@
   }}
 
  \renewcommand{\thefootnote}{%
-              {\color{magenta}%
+              {\color{risoone}%
                \fontfamily{iad}\selectfont%
                \textbf\arabic{footnote}%
                \hspace{.2em}%
