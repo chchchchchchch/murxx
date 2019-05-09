@@ -1,11 +1,7 @@
-FROM debian:wheezy
+FROM debian/eol:wheezy
 RUN rm -rf /var/lib/apt/lists/* \
            /etc/apt/sources.list.d/cuda.list \
            /etc/apt/sources.list.d/nvidia-ml.list
-
-RUN echo "deb http://archive.debian.org/debian wheezy main"     >  /etc/apt/sources.list
-RUN echo "deb http://archive.debian.org/debian wheezy-lts main" >> /etc/apt/sources.list
-RUN echo "Acquire::Check-Valid-Until false;" > /etc/apt/apt.conf
 
 RUN apt-get update
 
