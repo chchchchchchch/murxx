@@ -3,6 +3,8 @@
 
 190121_dev:
 	./lib/mdsh/mk.sh E/190121_dev.mdsh pdf
+190509_dev:
+	./lib/mdsh/mk.sh E/190509_dev.mdsh pdf
 
 lokal:
 	./utils/lokalize.sh -q
