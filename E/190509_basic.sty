@@ -39,13 +39,12 @@
  %\usepackage{eso-pic}
 
   \usepackage{ragged2e} % \justifying
- %\usepackage{everypage}
+  \usepackage{everypage}
  %\usepackage{needspace}
  %\usepackage{afterpage}
   \usepackage{etoolbox}
 
   \usepackage{seqsplit}
-
 
 % --------------------------------------------------------------------------- %
 %  F O R M A T 
@@ -208,11 +207,9 @@
 %               {\scriptsize\RomanNumeralCaps{\thepage}} \hspace{-10mm}%
 %               }
 
-
 % --------------------------------------------------------------------------- %
 %  P A G E   C O M M A N D S
 % --------------------------------------------------------------------------- %
-
 % --------------------------------------------------------------------------- %
   \newcommand{\emptypage}{ % SOMEHOW HACKY
    \twocolumn[]\thispagestyle{empty} %
@@ -230,6 +227,7 @@
   % -> if-then-else-for-odd-page-even-page
   \ifthispageodd{}{\emptypage}
   }
+% --------------------------------------------------------------------------- %
 
 % --------------------------------------------------------------------------- %
 %  V A R   C O M M A N D S
