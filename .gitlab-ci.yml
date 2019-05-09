@@ -1,4 +1,4 @@
-image: debian:wheezy
+image: debian/eol:wheezy
 
 before_script:
   - export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
