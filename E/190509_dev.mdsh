@@ -1,6 +1,6 @@
 % --------------------------------------------------------------------------- %
 % EXTENDFUNCTIONS: 181008_basic.functions
-% EXTENDFUNCTIONS: 190114_page.functions
+% EXTENDFUNCTIONS: 190509_page.functions
 % EXTENDFUNCTIONS: 190509_murxxbind.functions
 % --------------------------------------------------------------------------- %
 % USEPACKAGE: ../lib/tex/conditions
@@ -69,4 +69,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+
+% SPREAD: 190509_pages.svg 1
+
 

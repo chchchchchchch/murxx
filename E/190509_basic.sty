@@ -86,83 +86,18 @@
   \DeclareUnicodeCharacter{00A0}{\,}
 
 
- % https://tex.stackexchange.com/questions/332248/
- % -> different-headheight-in-odd-or-even-pages-with-fancyhdr
- %\let\TEXTHEIGHT=\textheight 
- %\makeatletter
- %\patchcmd\@outputpage{\textheight}{
- %                      \ifodd\count\z@ 6mm
- %                      \else \TEXTHEIGHT
- %                      \fi}{}{}
- %\makeatother
-% \let\TEXTHEIGHT=\textheight 
-% \makeatletter
-%%\patchcmd\@outputpage{\headheight}{\ifodd\count\z@ 0.5cm\else 3cm\fi}{}{}
-%%\patchcmd\@outputpage{\global\@colht\textheight}
-%%                     {\global\advance\textheight by
-%%                      \ifodd\count\z@ -20cm \else 20cm\fi
-%%                      \global\@colht\textheight}{}{}
-%%\patchcmd\@outputpage{\global\@colht\textheight}
-%%                     {%\ifodd\value{page} ODD \else EVEN \fi
-%%                      \global\advance\textheight by
-%%                      \ifodd\count\z@ -20cm \else 20cm\fi
-%%                      \global\@colht\textheight
-%%                     }{}{}
-% \makeatother
-
-%% https://tex.stackexchange.com/questions/17787/
-%% -> if-pagestyle-equal-to-how-should-i-ask-it
-% \makeatletter
-% \AtBeginPage{
-% \ifx\@evenfoot\@empty empty
-% \else not empty\fi
-% }
-% \makeatother
-
-% \makeatletter
-% \AtBeginPage{\ifodd\value{page}
-%               ODD \ifx\@evenfoot\@empty empty \else not empty\fi
-%              \else
-%               EVEN \ifx\@evenfoot\@empty empty \else not empty\fi 
-%              \fi}
-% \makeatother
-
 % \makeatletter
 % \AtBeginPage{\ifodd\value{page}\else
 %              \ifx\@evenfoot\@empty\else CLEARTORIGHT \fi\fi}
 % \makeatother
-
-% \makeatletter
-% \PageLayout{
-%   \ifodd\value{page}
-%   \else
-%   \ifx\@evenfoot\@empty\else CLEARTORIGHT \fi
-%   \fi
-% }
-% \makeatother
-
-% \makeatletter
-% \AtBeginPage{\ifodd\value{page}\else
-%              \ifx\@evenfoot\@empty
-%              \else
-%               CLEARTORIGHT 
-%              \fi\fi}
-% \makeatother
-
-% \makeatletter
-% \AddEverypageHook{\ifodd\value{page}\else
-%                   \ifx\@evenfoot\@empty\else 
-%                   CLEARTORIGHT \fi\fi}
-% \makeatother
-
 
   \newcommand{\pusher}{\vbox{}
 
                        \vspace{2em}}
   \newcommand{\pushpage}{}
 
-  % https://tex.stackexchange.com/questions/51733/
-  % -> global-renewcommand-equivalent-of-global-def
+ % https://tex.stackexchange.com/questions/51733/
+ % -> global-renewcommand-equivalent-of-global-def
   \makeatletter
   \def\gnewcommand{\g@star@or@long\new@command}
   \def\grenewcommand{\g@star@or@long\renew@command}
@@ -172,17 +107,19 @@
 
   \makeatletter
   \AddEverypageHook{\ifx\@evenfoot\@empty
+                    % PAGESTYLE = EMPTY 
+                    % => DO NOTHING
                     \grenewcommand{\pushpage}{}
                     \else
+                    % PAGESTYLE != EMPTY 
+                    % => INSERT PUSHER
                     \grenewcommand{\pushpage}{\pusher}
                     \fi
   }
   \makeatother
 
-% \makeatletter
-% \AtBeginShipout{\thepush}
-% \makeatother
-
+ % https://tex.stackexchange.com/questions/332248/
+ % -> different-headheight-in-odd-or-even-pages-with-fancyhdr
   \makeatletter
   \patchcmd\@outputpage{\global\@colht\textheight}
                        {\ifodd\value{page}\pushpage\else\fi
@@ -191,9 +128,6 @@
                         \global\@colht\textheight
                        }{}{}
   \makeatother
-
-
-
 
 % --------------------------------------------------------------------------- %
 %  C O L O R S
