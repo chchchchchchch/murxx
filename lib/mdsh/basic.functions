@@ -113,14 +113,11 @@
 
 # MAKE LOCAL IF NECESSARY
 # --------------------------------------------------------------------------- #
-  MDSH=${TMPID}.${TMPIDX}.mdsh
-  getFile $INPUT $MDSH
-  if [ X$SUCCESS == XYES ];then
-       RUN="YES"
-  else
-       RUN="NO"    
-  fi
-
+  TARGET="${TMPID}.${TMPIDX}.mdsh"
+  getFile $INPUT $TARGET
+  if [ X$SUCCESS == XYES ];then RUN="YES";else RUN="NO";fi
+  MDSH="${TMPID}.${TMPIDX}"`echo $RANDOM | md5sum | cut -c 1-8`".mdsh"
+  if [ -f "$TARGET" ];then cp $TARGET $MDSH;fi
 # =========================================================================== #
 # TRANSFORM (IF POSSIBLE/NECESSARY)
 # --------------------------------------------------------------------------- #
