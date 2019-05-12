@@ -1,3 +1,5 @@
+
+  SHSRCID=`echo $BASH_SOURCE | md5sum | cut -c 1-12`
 # --------------------------------------------------------------------------- #
   function svgAnalyse() {
  
@@ -217,32 +219,34 @@
 
   }
 # --------------------------------------------------------------------------- #
-
 # CREATE UNIQUE NAME FOR MACROS USED HERE
-# ---------------------------------------
-  OFFPAGETEXTMACRO="\\"`echo offpagetext$RANDOM   | md5sum | base64    | #
-                        tr [:upper:] [:lower:]    | sed 's/[^a-z]//g'  | #
-                        cut -c 1-6``echo $RANDOM  | md5sum             | #
-                        sed 's/[^a-f]//g' | cut -c 1-6`                  #
-  SPREADWITHTEXTMACRO="\\"`echo offpagetext$RANDOM | md5sum | base64   | #
-                           tr [:upper:] [:lower:]  | sed 's/[^a-z]//g' | #
-                           cut -c 1-6``echo $RANDOM | md5sum           | #
-                           sed 's/[^a-f]//g' | cut -c 1-6`               #
+# --------------------------------------------------------------------------- #
 
-  write2src "% ------------------------------------------------ %"
-  write2src   "\newcommand${OFFPAGETEXTMACRO}[1]{"
-  write2src   "\begin{minipage}{10\paperwidth} % MAKE IT HUGE"
-  write2src   "{\vspace{-4\paperheight} % MOVE IT OUT"
-  write2src   " \tiny #1} % MAKE IT TINY"
-  write2src   "\end{minipage}}"
-  
-  write2src "% ------------------------------------------------ %"
-  write2src "   \newcommand${SPREADWITHTEXTMACRO}[3]{%"
-  write2src "   \includepdf[pagecommand={\thispagestyle{empty}"
-  write2src "                            ${OFFPAGETEXTMACRO}{#3}},"
-  write2src "               scale=1,pages=#2]{#1}"
-  write2src "   }"
-  write2src "% ------------------------------------------------ %"
+  OFFPAGETEXTMACRO="\\"`echo offpagetext$SHSRCID  | md5sum | base64    | #
+                        tr [:upper:] [:lower:]    | sed 's/[^a-z]//g'  | #
+                        cut -c 1-12`
+  SPREADWITHTEXTMACRO="\\"`echo spread+txt$SHSRCID | md5sum | base64   | #
+                           tr [:upper:] [:lower:]  | sed 's/[^a-z]//g' | #
+                           cut -c 1-12`
+
+  if [ `grep ${OFFPAGETEXTMACRO} $SRCDUMP | wc -l` -lt 1 ]
+  then
+       write2src " % ------------------------------------------------ %"
+       write2src "   \newcommand${OFFPAGETEXTMACRO}[1]{"
+       write2src "   \begin{minipage}{10\paperwidth} % MAKE IT HUGE"
+       write2src "   {\vspace{-4\paperheight} % MOVE IT OUT"
+       write2src "    \tiny #1} % MAKE IT TINY"
+       write2src "   \end{minipage}}"
+       
+       write2src " % ------------------------------------------------ %"
+       write2src "   \newcommand${SPREADWITHTEXTMACRO}[3]{%"
+       write2src "   \includepdf[pagecommand={\thispagestyle{empty}"
+       write2src "                            ${OFFPAGETEXTMACRO}{#3}},"
+       write2src "               scale=1,pages=#2]{#1}"
+       write2src "   }"
+       write2src " % ------------------------------------------------ %"
+
+  fi 
 
 # --------------------------------------------------------------------------- #
 
