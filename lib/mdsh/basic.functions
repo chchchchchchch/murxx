@@ -11,13 +11,10 @@
           SHORTURLOG="shorturls.log"
         FID=`date +%s%N`; echo $FID >> ${TMPID}.fid
   fi
-
 # --------------------------------------------------------------------------- #
 # WRITE TO DUMP
 # --------------------------------------------------------------------------- #
   function write2src() { echo "$*" >> $SRCDUMP ; }
-# --------------------------------------------------------------------------- #
-
 # --------------------------------------------------------------------------- #
 # MAKE LOCAL IF NECESSARY
 # --------------------------------------------------------------------------- #
@@ -72,12 +69,9 @@
   }
 
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
-
 # =========================================================================== #
 # MAIN MDSH CONVERT FUNCTION
 # =========================================================================== #
-
 
   function mdsh2src() {
 
@@ -120,7 +114,7 @@
 # --------------------------------------------------------------------------- #
   if [ "$RUN" == "YES" ] && 
      [ -f "$MDSH" ] &&
-     [ `wc -l "$MDSH" | cut -d " " -f 1` -gt 0 ]; then
+     [ `wc -l "$MDSH" | cut -d " " -f 1` -gt 0 ];then
 
 # REMEMBER LOCATION IF LOCAL (NOT WORKING FOR NESTING AT THE MOMENT???)
 # --------------------------------------------------------------------------- #
@@ -155,7 +149,7 @@
     PROTECTED=${TMPID}.${TMPIDX}.mdshprotected
     cp $MDSH $PROTECTED
 
-    if [ `grep "^%" $PROTECTED | wc -l` -gt 0 ]; then
+    if [ `grep "^%" $PROTECTED | wc -l` -gt 0 ];then
    
    # TEMPORARILY REMOVE COMMAND LINES
    # --------------------------------  
@@ -186,7 +180,7 @@
 # CONVERT MARKDOWN WITH PANDOC (CUSTOM FOOTNOTES/BIBREFS)
 # --------------------------------------------------------------------------- #
   MDSHMOD=${TMPID}.${TMPIDX}.mdshmod
-  if [ -f $MDSHMOD ]; then rm $MDSHMOD ; fi
+  if [ -f $MDSHMOD ];then rm $MDSHMOD ; fi
 
   # TEMPORARY PROTECTORS (FOO)
   # ---------------------------------
@@ -247,18 +241,18 @@
   TIMESINCLUDED=`grep $MD5THIS ${TMPID}.included | wc -l`
   echo $MD5THIS >> ${TMPID}.included
 
-  if [ $TIMESINCLUDED -ge 5 ]; then
+  if [ $TIMESINCLUDED -ge 5 ];then
        echo "Skipping! (caught in a loop)"
        SKIP="YES"
   else
        SKIP="NO"
   fi
 
-  if [ X"$SKIP" != XYES ]; then
+  if [ X"$SKIP" != XYES ];then
 
 # RESTORE MDSH LINES
 # --------------------------------------------------------------------------- #
-  if [ -f $SAVECMDS ]; then
+  if [ -f $SAVECMDS ];then
   sed -i 's/\\/\\\\/g' $SAVECMDS # PROTECT ESCAPES (aka. \v PROBLEM)
 
   for CMDID in `cat $SAVECMDS | cut -d ":" -f 1 | sort -u`
@@ -285,7 +279,7 @@
          ISCOMMENT=`echo $LINE | grep "^%" | wc -l` 
        # --------------------------------------------------- # 
        # IF LINE STARTS WITH %
-         if [ $ISCOMMENT -ge 1 ]; then
+         if [ $ISCOMMENT -ge 1 ];then
  
             CMD=`echo "$LINE"             | #
                  grep "^%[ ]*[A-Z0-9]\+:" | # BE PICKY
@@ -304,7 +298,7 @@
 
        # --------------------------------------------------- # 
        # IF COMMAND EXISTS 
-         if [ $CMDMATCH -ge 1 ]; then
+         if [ $CMDMATCH -ge 1 ];then
             # EXECUTE COMMAND
               $CMD "$ARG"
          else
@@ -337,14 +331,14 @@
 
 # RESTORE INCLUDEPATH
 # --------------------------------------------------------------------------- #
-  if [ `echo $LASTINCLUDEPATH | wc -c` -gt 1 ]; then
+  if [ `echo $LASTINCLUDEPATH | wc -c` -gt 1 ];then
         INCLUDEPATH="$LASTINCLUDEPATH"
   fi
 
 # CLEANUP (FILES)
 # --------------------------------------------------------------------------- #
-  if [ -f $SAVECMDS ]; then rm $SAVECMDS ;fi
-  if [ -f $PROTECTED ]; then rm $PROTECTED ;fi
+  if [ -f $SAVECMDS ];then rm $SAVECMDS ;fi
+  if [ -f $PROTECTED ];then rm $PROTECTED ;fi
 
     # REMOVE ID AGAIN (REMBERED TO PREVENT RECURSION)
       sed -i "/$MD5THIS/d" ${TMPID}.included
@@ -375,7 +369,7 @@ function INCLUDE() {
 
   # REMOVE ADDED FUNCTIONS
   # -------------------------------------------------------------- #
-    if [ -f ${TMPID}.fid ]; then
+    if [ -f ${TMPID}.fid ];then
 
     # LOAD LATEST FUNCTION ID
       FID=`tail -n 1 ${TMPID}.fid`
