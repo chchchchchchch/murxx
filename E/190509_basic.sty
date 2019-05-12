@@ -68,7 +68,6 @@
 % --------------------------------------------------------------------------- %
 %  F U N C T I O N A L 
 % --------------------------------------------------------------------------- %
-
   % PREVENT HYPHENATION FOR WORDS STARTING WITH UPPERCASE
   % \uchyph=0
   % PREVENT HYPHENATION OVER PAGE BREAK
@@ -85,6 +84,14 @@
 
   \DeclareUnicodeCharacter{00A0}{\,}
 
+ % https://tex.stackexchange.com/questions/51733/
+ % -> global-renewcommand-equivalent-of-global-def
+ \makeatletter
+ \def\gnewcommand{\g@star@or@long\new@command}
+ \def\grenewcommand{\g@star@or@long\renew@command}
+ \def\g@star@or@long#1{% 
+   \@ifstar{\let\l@ngrel@x\global#1}{\def\l@ngrel@x{\long\global}#1}}
+
 % --------------------------------------------------------------------------- %
 % PUSH FLOW TEXT TO THE RIGHT/EVEN SIDE (= SKIP LEFT/ODD PAGES)
 % --------------------------------------------------------------------------- %
@@ -94,14 +101,6 @@
 
                        \vspace{.05\textheight}}
   \newcommand{\pushpage}{} % INIT WITH NOTHING
-
- % https://tex.stackexchange.com/questions/51733/
- % -> global-renewcommand-equivalent-of-global-def
-  \makeatletter
-  \def\gnewcommand{\g@star@or@long\new@command}
-  \def\grenewcommand{\g@star@or@long\renew@command}
-  \def\g@star@or@long#1{% 
-    \@ifstar{\let\l@ngrel@x\global#1}{\def\l@ngrel@x{\long\global}#1}}
 
   \AddEverypageHook{\ifx\@evenfoot\@empty
                     % PAGESTYLE = EMPTY 
@@ -113,7 +112,6 @@
                     \grenewcommand{\pushpage}{\pusher}
                     \fi
   }
-
  % https://tex.stackexchange.com/questions/332248/
  % -> different-headheight-in-odd-or-even-pages-with-fancyhdr
   \patchcmd\@outputpage{\global\@colht\textheight}
@@ -125,11 +123,52 @@
                         \global\@colht\textheight
                        }{}{}
   \makeatother
-
-% \AtBeginPage{\ifodd\value{page}\else
-%              \ifx\@evenfoot\@empty\else CLEARTORIGHT \fi\fi}
-% \makeatother
-
+% --------------------------------------------------------------------------- %
+% BACKGROUND GRAFIK
+% --------------------------------------------------------------------------- %
+  \newif\ifpageloopend
+  \newcounter{pageloopnow}
+  \setcounter{pageloopnow}{2} % INIT
+  \newcounter{pageloopmax}
+  \setcounter{pageloopmax}{2}
+  \newcommand{\pageloopsrc}{/tmp/tmpspread661cf9.pdf}
+% ----
+  \newcommand{\pageloop}[1]{% IF PAGENOW IS 
+                            % GREATER THAN PAGEMAX
+                            % RESET TO ONE
+                           \ifnum\value{pageloopnow} > \value{pageloopmax}
+                           \setcounter{pageloopnow}{2}
+                           \fi
+                           \includegraphics[width=\paperwidth,page=#1]
+                           {\pageloopsrc}%
+  }
+% ----
+  \makeatletter
+  \AtBeginPage{%
+   \ifodd\value{page} % DO NOTHING (IF ODD)
+    \ifx\@evenfoot\@empty % DO NOTHING (IF PAGESTYLE = EMTPY)
+    \else \AddToShipoutPictureFG*{RIGHT \thepage : \arabic{pageloopnow}}
+          \AddToShipoutPictureBG*{%
+          \pageloop{2}
+          % PAGE -1 (= NEXT LEFT PAGE)
+          \addtocounter{pageloopnow}{-1}
+          }    
+    \fi
+   \else
+    \ifx\@evenfoot\@empty % DO NOTHING (IF PAGESTYLE = EMTPY)
+    \else % PAGE -1 (= LEFT PAGE)
+          \addtocounter{pageloopnow}{-1}
+          \AddToShipoutPictureFG*{LEFT \thepage : \arabic{pageloopnow}}
+          \AddToShipoutPictureBG*{%
+          \pageloop{1}
+      }    
+    \fi
+   \fi
+   \ifx\@evenfoot\@empty % DO NOTHING (IF PAGESTYLE = EMTPY)
+   \else\addtocounter{pageloopnow}{2} % CONTINUE COUNT
+   \fi
+  }
+  \makeatother
 % --------------------------------------------------------------------------- %
 %  C O L O R S
 % --------------------------------------------------------------------------- %
@@ -232,15 +271,8 @@
   \renewcommand{\headrulewidth}{0pt}
  %\fancyfoot[LO]{}
  %\fancyfoot[RE]{}
- %\fancyhead[LO]{%\AtBeginPage{EMPTY}
- %\fancyhead[RE]{%\AddToShipoutPicture*{%
- %               %  \setlength{\unitlength}{\paperwidth}
- %               %  \put(0,0){\colorbox{red}{%
- %               %  \makebox(1,1.4){}}}
- %               %}
- %               %\AddThispageHook{XXX}
- %               %\AtBeginPage{LEFT}
- %              }
+ %\fancyhead[LO]{}
+ %\fancyhead[RE]{}
 
 % --------------------------------------------------------------------------- %
 %  P A G E   C O M M A N D S
