@@ -85,16 +85,15 @@
 
   \DeclareUnicodeCharacter{00A0}{\,}
 
-
-% \makeatletter
-% \AtBeginPage{\ifodd\value{page}\else
-%              \ifx\@evenfoot\@empty\else CLEARTORIGHT \fi\fi}
-% \makeatother
-
+% --------------------------------------------------------------------------- %
+% PUSH FLOW TEXT TO THE RIGHT/EVEN SIDE (= SKIP LEFT/ODD PAGES)
+% --------------------------------------------------------------------------- %
+  \newlength{\TEXTHEIGHT}
+  \setlength{\TEXTHEIGHT}{.95\textheight}
   \newcommand{\pusher}{\vbox{}
 
-                       \vspace{2em}}
-  \newcommand{\pushpage}{}
+                       \vspace{.05\textheight}}
+  \newcommand{\pushpage}{} % INIT WITH NOTHING
 
  % https://tex.stackexchange.com/questions/51733/
  % -> global-renewcommand-equivalent-of-global-def
@@ -103,9 +102,7 @@
   \def\grenewcommand{\g@star@or@long\renew@command}
   \def\g@star@or@long#1{% 
     \@ifstar{\let\l@ngrel@x\global#1}{\def\l@ngrel@x{\long\global}#1}}
-  \makeatother
 
-  \makeatletter
   \AddEverypageHook{\ifx\@evenfoot\@empty
                     % PAGESTYLE = EMPTY 
                     % => DO NOTHING
@@ -116,18 +113,22 @@
                     \grenewcommand{\pushpage}{\pusher}
                     \fi
   }
-  \makeatother
 
  % https://tex.stackexchange.com/questions/332248/
  % -> different-headheight-in-odd-or-even-pages-with-fancyhdr
-  \makeatletter
   \patchcmd\@outputpage{\global\@colht\textheight}
-                       {\ifodd\value{page}\pushpage\else\fi
+                       {\ifodd\value{page}
+                        \pushpage\else\fi
                         \global\advance\textheight by
-                        \ifodd\count\z@ -20cm \else 20cm\fi
+                        \ifodd\count\z@ -\TEXTHEIGHT
+                        \else             \TEXTHEIGHT \fi
                         \global\@colht\textheight
                        }{}{}
   \makeatother
+
+% \AtBeginPage{\ifodd\value{page}\else
+%              \ifx\@evenfoot\@empty\else CLEARTORIGHT \fi\fi}
+% \makeatother
 
 % --------------------------------------------------------------------------- %
 %  C O L O R S
