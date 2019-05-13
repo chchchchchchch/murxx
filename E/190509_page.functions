@@ -231,20 +231,22 @@
 
   if [ `grep ${OFFPAGETEXTMACRO} $SRCDUMP | wc -l` -lt 1 ]
   then
-       write2src " % ------------------------------------------------ %"
-       write2src "   \newcommand${OFFPAGETEXTMACRO}[1]{"
-       write2src "   \begin{minipage}{10\paperwidth} % MAKE IT HUGE"
-       write2src "   {\vspace{-4\paperheight} % MOVE IT OUT"
-       write2src "    \tiny #1} % MAKE IT TINY"
-       write2src "   \end{minipage}}"
-       
-       write2src " % ------------------------------------------------ %"
-       write2src "   \newcommand${SPREADWITHTEXTMACRO}[3]{%"
-       write2src "   \includepdf[pagecommand={\thispagestyle{empty}"
-       write2src "                            ${OFFPAGETEXTMACRO}{#3}},"
-       write2src "               scale=1,pages=#2]{#1}"
-       write2src "   }"
-       write2src " % ------------------------------------------------ %"
+        write2src " % ------------------------------------------------ %"
+        write2src "   \newcommand${OFFPAGETEXTMACRO}[1]{"
+        write2src "   \begin{minipage}{10\paperwidth} % MAKE IT HUGE"
+        write2src "   {\vspace{-4\paperheight} % MOVE IT OUT"
+        write2src "    \tiny #1} % MAKE IT TINY"
+        write2src "   \end{minipage}}"
+        
+        write2src " % ------------------------------------------------ %"
+        write2src "   \newcommand${SPREADWITHTEXTMACRO}[3]{%"
+        write2src "    \AddToShipoutPictureFG*{%"
+        write2src "    \opacity{1.0}% SET TO 100%"
+        write2src "    \includegraphics[width=\paperwidth,page=#2]{#1}"
+        write2src "    }"
+        write2src "    \vspace*{.5\textheight}\newpage"
+        write2src "   }"
+        write2src " % ------------------------------------------------ %"
 
   fi 
 
@@ -313,10 +315,11 @@ function SPREAD() {
  # ALLOW IRREGULAR PLACEMENT
  # ----
    if [ `echo $PAGES | grep -v "-" | # RM - AND 0-9 => 2 -gt 0
-         wc -l` -gt 0 ]; then  PAGECOMMAND=""; fi
+         wc -l` -gt 0 ];then  PAGECOMMAND=""; fi
 
-   if [ -f $PDFGET ];then
-        write2src "\grenewcommand{\pushpage}{}" 
+   if [ -f $PDFGET ]
+   then write2src "\grenewcommand{\pushpage}{}"
+        write2src "\newpage"
         write2src "$PAGECOMMAND"
         for PAGENUM in $PAGESEQ
          do

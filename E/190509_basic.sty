@@ -36,10 +36,11 @@
  %\usepackage{textcomp}
  %\usepackage{pifont}
   \usepackage{xcolor}
+  \usepackage{transparent}
  %\usepackage{eso-pic}
 
   \usepackage{ragged2e} % \justifying
- %\usepackage{everypage}
+  \usepackage{everypage}
  %\usepackage{needspace}
  %\usepackage{afterpage}
   \usepackage{etoolbox}
@@ -79,7 +80,7 @@
   % https://groups.google.com/forum/#!topic/pandoc-discuss/O-N0H1eBnVU
   \let\oldhref=\href 
   \renewcommand{\href}[2]{#2\footnote{%
-               {\fontfamily{ipm}\selectfont\color{risoone}%
+               {\fontfamily{ipm}\selectfont\color{risozwei}%
                 \footnotesize\seqsplit{#1}}}}
 
   \DeclareUnicodeCharacter{00A0}{\,}
@@ -102,7 +103,8 @@
                        \vspace{.05\textheight}}
   \newcommand{\pushpage}{} % INIT WITH NOTHING
 
-  \AddEverypageHook{\ifx\@evenfoot\@empty
+ %\AddEverypageHook{ % NOT REQUIRED TODO: FIND OUT
+                    \ifx\@evenfoot\@empty
                     % PAGESTYLE = EMPTY 
                     % => DO NOTHING
                     \grenewcommand{\pushpage}{}
@@ -111,7 +113,7 @@
                     % => INSERT PUSHER
                     \grenewcommand{\pushpage}{\pusher}
                     \fi
-  }
+ %}
  % https://tex.stackexchange.com/questions/332248/
  % -> different-headheight-in-odd-or-even-pages-with-fancyhdr
   \patchcmd\@outputpage{\global\@colht\textheight}
@@ -136,6 +138,7 @@
   \ifnum\value{pageloopnow}>\value{pageloopmax}% IF PAGENOW IS GREATER PAGEMAX
   \setcounter{pageloopnow}{\value{pageloopone}}\fi% RESET COUNTER TO PAGEONE
   \ifdefempty{\pageloopsrc}{}{%
+  \opacity{1.0}% SET TO 100%
   \includegraphics[width=\paperwidth,page=#1]{\pageloopsrc}}
   }
 % ----
@@ -164,8 +167,17 @@
 % --------------------------------------------------------------------------- %
 %  C O L O R S
 % --------------------------------------------------------------------------- %
-  \definecolor{risoone}{cmyk}{1,0,0,0}
+  \definecolor{risoeins}{cmyk}{1,0,0,0}
+  \definecolor{risozwei}{cmyk}{0,1,0,0}
+  %\definecolor{risodrei}{cmyk}{0,1,0,0}
+  %\definecolor{risovier}{cmyk}{0,1,0,0}
+  %\definecolor{risofunf}{cmyk}{0,1,0,0}
 
+  \color{risoeins}
+
+  \newcommand{\txtopacity}{1.0}
+  \newcommand{\opacity}[1]{\transparent{#1}}
+  \AddEverypageHook{\opacity{\txtopacity}}
 % --------------------------------------------------------------------------- %
 %  F O N T S
 % --------------------------------------------------------------------------- %
@@ -173,10 +185,10 @@
   \newcommand{\rmstandard}{iad}
   \newcommand{\sfstandard}{iad}
 
-  \renewcommand*{\ttdefault}{\ttstandard}\selectfont
-  \renewcommand*{\rmdefault}{\rmstandard}\selectfont
-  \renewcommand*{\sfdefault}{\sfstandard}\selectfont
-  
+  \renewcommand*{\ttdefault}{\ttstandard}
+  \renewcommand*{\rmdefault}{\rmstandard}
+  \renewcommand*{\sfdefault}{\sfstandard}
+ 
 % --------------------------------------------------------------------------- %
 %  T E X T  A L I G N M E N T
 % --------------------------------------------------------------------------- %
@@ -219,7 +231,6 @@
  %\renewcommand\subsubsection[1]{\SUBSUBSECTION*{#1}}
   \renewcommand\subsubsection[1]{\SUBSUBSECTION*{\uppercase{#1}}}
 
-
 % --------------------------------------------------------------------------- %
 %  F O O T N O T E S 
 % --------------------------------------------------------------------------- %
@@ -246,7 +257,7 @@
   }}
 
  \renewcommand{\thefootnote}{%
-              {\color{risoone}%
+              {\color{risozwei}%
                \fontfamily{iad}\selectfont%
                \textbf\arabic{footnote}%
                \hspace{.2em}%
