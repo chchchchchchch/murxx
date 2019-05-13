@@ -127,14 +127,16 @@
 % BACKGROUND GRAFIK
 % --------------------------------------------------------------------------- %
   \newif\ifpageloopend
-  \newcommand{\pageloopsrc}{/tmp/tmpspread661cf9.pdf}
+  \newcommand{\pageloopsrc}{}
+  \newcounter{pageloopone}\setcounter{pageloopone}{1} % INIT
   \newcounter{pageloopnow}\setcounter{pageloopnow}{1} % INIT
-  \newcounter{pageloopmax}\setcounter{pageloopmax}{4} % INIT
+  \newcounter{pageloopmax}\setcounter{pageloopmax}{2} % INIT
 % ----
   \newcommand{\pageloop}[1]{%
   \ifnum\value{pageloopnow}>\value{pageloopmax}% IF PAGENOW IS GREATER PAGEMAX
-  \setcounter{pageloopnow}{1}\fi%              % RESET COUNTER TO ONE
-  \includegraphics[width=\paperwidth,page=#1]{\pageloopsrc}
+  \setcounter{pageloopnow}{\value{pageloopone}}\fi% RESET COUNTER TO PAGEONE
+  \ifdefempty{\pageloopsrc}{}{%
+  \includegraphics[width=\paperwidth,page=#1]{\pageloopsrc}}
   }
 % ----
   \makeatletter

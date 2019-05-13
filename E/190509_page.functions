@@ -315,7 +315,7 @@ function SPREAD() {
    if [ `echo $PAGES | grep -v "-" | # RM - AND 0-9 => 2 -gt 0
          wc -l` -gt 0 ]; then  PAGECOMMAND=""; fi
 
-   if [ -f $PDFGET ]; then
+   if [ -f $PDFGET ];then
         write2src "\grenewcommand{\pushpage}{}" 
         write2src "$PAGECOMMAND"
         for PAGENUM in $PAGESEQ
@@ -326,6 +326,25 @@ function SPREAD() {
             write2src "}"
         done
         write2src "\grenewcommand{\pushpage}{\pusher}" 
+   fi
+
+}
+
+# --------------------------------------------------------------------------- #
+
+function BACKGROUND() {
+
+   mkpages $* --keeptmp
+
+   NUMPAGES=`pdftk $PDFGET dump_data  | # GET INFO ($PDFGET SET BY mkpages)
+             grep NumberOfPages       | # GET PAGE NUMBER INFO
+             cut -d ":" -f 2          | # CUT FIELD
+             sed 's/[^0-9]//g'`         # RM ALL BUT NUMBERS
+
+   if [ -f $PDFGET ]
+   then write2src "\setcounter{pageloopmax}{$NUMPAGES}"
+        write2src "\renewcommand{\pageloopsrc}{$PDFGET}"
+   else write2src "\renewcommand{\pageloopsrc}{}"
    fi
 
 }
