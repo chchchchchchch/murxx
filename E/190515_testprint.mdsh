@@ -1,0 +1,115 @@
+% --------------------------------------------------------------------------- %
+% EXTENDFUNCTIONS: 181008_basic.functions
+% EXTENDFUNCTIONS: 190509_murxxbind.functions
+% EXTENDFUNCTIONS: 190515_riso.functions
+% --------------------------------------------------------------------------- %
+% USEPACKAGE: ../lib/tex/conditions
+% USEPACKAGE: ../lib/tex/lstlanguages
+% ---
+% DOCUMENTCLASS: [fontsize=10pt,cleardoublepage=empty]{scrbook}
+% ----
+% USEPACKAGE: 190509_basic
+% --------------------------------------------------------------------------- %
+% PDFXTITLE: 20(XX) Years MUR.AT 
+% PDFXAUTHOR: Christoph Haag
+% PDFXORG: LAFKON Publishing
+% MKPDFXCOMPLIANT:
+% --------------------------------------------------------------------------- %
+% RISOEINS: ff0000
+% RISOZWEI: 00ff00
+%!RISODREI: 00ff00
+%!RISOVIER: 00ff00
+%!RISOFUNF: 00ff00
+% TXTCOLOR: ff0000
+% SUBCOLOR: 00ff00
+% --------------------------------------------------------------------------- %
+%!ADD2PREAMBLE: \usepackage{showframe}
+% --------------------------------------------------------------------------- %
+
+% BACKGROUND: 190515_testprint.svg
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor[^]{in reprehenderit in voluptate velit} esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+non proident, sunt in culpa qui.[^]{officia deserunt mollit anim id est laborum}
+
+% NEWPAGE:
+
+% TEXIN: \ragged
+% INCLUDE:../src/mur.at/2018-im-netz-der-sinne.md 9-15
+
+% HYPHENATE: au-to-ma-ti-sier-te
+
+% TEXIN: \justified
+% INCLUDE:../src/mur.at/2018-im-netz-der-sinne.md 17-35
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure [dolor](http://www.mur.at) esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+non proident, sunt in culpa qui.[^]{officia deserunt mollit anim id est laborum}
+
+% NEWPAGE:
+
+dsfdsfdsfdsf
+
+% INCLUDE:../src/mur.at/2018-im-netz-der-sinne.md 17-35
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure [dolor](http://www.mur.at) esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+non proident, sunt in culpa qui.[^]{officia deserunt mollit anim id est laborum}
+
+% SPREAD: 190509_pages.svg 1-2
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit
+-------------------------------------------------------
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+[non proident, sunt in culpa qui](http://git.mur.at/?p=www.mur.at.git;a=blob_plain;f=content/project/2018-im-netz-der-sinne.md;h=ec12149;hb=HEAD)
+
+### Lorem ipsum dolor sit amet
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+
+Cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+
+% SPREAD: 190509_pages.svg 1
+
+
+### Lorem ipsum dolor sit amet
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+
+Cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+

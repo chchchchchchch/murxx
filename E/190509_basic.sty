@@ -80,7 +80,8 @@
   % https://groups.google.com/forum/#!topic/pandoc-discuss/O-N0H1eBnVU
   \let\oldhref=\href 
   \renewcommand{\href}[2]{#2\footnote{%
-               {\fontfamily{ipm}\selectfont\color{risozwei}%
+               {\fontfamily{ipm}\selectfont%
+               {\color{risozwei}}%
                 \footnotesize\seqsplit{#1}}}}
 
   \DeclareUnicodeCharacter{00A0}{\,}
@@ -167,8 +168,8 @@
 % --------------------------------------------------------------------------- %
 %  C O L O R S
 % --------------------------------------------------------------------------- %
-  \definecolor{risoeins}{cmyk}{1,0,0,0}
-  \definecolor{risozwei}{cmyk}{0,1,0,0}
+  \definecolor{risoeins}{cmyk}{0,0,0,1}
+  \definecolor{risozwei}{cmyk}{0,0,0,1}
   %\definecolor{risodrei}{cmyk}{0,1,0,0}
   %\definecolor{risovier}{cmyk}{0,1,0,0}
   %\definecolor{risofunf}{cmyk}{0,1,0,0}
@@ -176,6 +177,7 @@
   \color{risoeins}
 
   \newcommand{\txtopacity}{1.0}
+  \newcommand{\subopacity}{0.1}
   \newcommand{\opacity}[1]{\transparent{#1}}
   \AddEverypageHook{\opacity{\txtopacity}}
 % --------------------------------------------------------------------------- %
