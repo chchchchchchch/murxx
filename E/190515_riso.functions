@@ -108,6 +108,7 @@ function TXTCOLOR(){ TXTCOLOR=`echo $* | sed 's/ /\n/g' | #
                                egrep "^[0-9A-Fa-f]{6}$"`;  }
 function SUBCOLOR(){ SUBCOLOR=`echo $* | sed 's/ /\n/g' | #
                                egrep "^[0-9A-Fa-f]{6}$"`;  }
+
 # --------------------------------------------------------------------------- #
  # ------------------------------------------- #
    function map(){ # THANKS TO M.MURTAUGH!
@@ -203,7 +204,7 @@ function SUBCOLOR(){ SUBCOLOR=`echo $* | sed 's/ /\n/g' | #
      sed -i "s/$C:#ffffff/PROTECTWHITE/g"     $OUT
      sed -i "s/$C:#[0-9a-f]\{6\}/$C:none/g"   $OUT
      sed -i "s/XXXX:/$C:/g"                   $OUT
-     sed -i "s/PROTECTWHITE/fill:#ffffff/g"   $OUT
+     sed -i "s/PROTECTWHITE/$C:#ffffff/g"     $OUT
      sed -i "s/display:none/display:inline/g" $OUT
   
      done
