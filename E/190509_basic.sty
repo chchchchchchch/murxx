@@ -201,8 +201,9 @@
 %  W H I T E S P A C E
 % --------------------------------------------------------------------------- %
   \parindent=0pt
-  \setlength{\parskip}{5pt plus 5pt minus 5pt}
+  \setlength{\parskip}{8pt plus 5pt minus 3pt}
   \setstretch{1.1} % LINEHEIGHT % (P:setspace)
+  \raggedbottom
 
 % --------------------------------------------------------------------------- %
 %  H E A D L I N E S
@@ -252,10 +253,11 @@
   \setlength{\footnotemargin}{0em}
  % ABSTAND TRENNLINIE FUSSNOTEN
    \renewcommand{\footnoterule}{
-    \vspace*{5mm}
-     \noindent
-      \rule{\textwidth}{0.0pt}{
-       \vspace*{-3pt}
+    \vfill
+     \vspace*{5mm}
+      \noindent
+       \rule{\textwidth}{0.0pt}{
+        \vspace*{-3pt}
   }}
 
  \renewcommand{\thefootnote}{%
